@@ -1,0 +1,158 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #181818;
+    color: #fff;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation bar styles */
+.navbar {
+    background-color: #323232;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.navbar a {
+    margin-right: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
+    width: 70vw;
+}
+
+.container {
+    width: 70vw;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar {
+    width: 220px;
+    height: 400px;
+    background-color: #323232;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+}
+
+.button-container {
+    width: 70vw;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+}
+
+.button-container button {
+    margin-left: 20px;
+}
+
+.drawing-area {
+    position: relative;
+}
+
+.drawing-area img {
+    position: absolute;
+    pointer-events: none; /* Make the image non-clickable */
+}
+
+canvas {
+    position: relative;
+    border: none;
+    background-color: transparent;
+}
+
+.tool {
+    width: 120px;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.tool:hover {
+    background-color: #555;
+}
+
+.tool.active {
+    background-color: #1DB954; /* Spotify green */
+}
+
+.edit-button {
+    min-width: 140px;
+    padding: 10px 15px;
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+    background-color: #168f41; 
+}
+
+.edit-button:active {
+    background-color: #136b32;
+}
+
+#save-button {
+    min-width: 140px;
+    padding: 10px 15px;
+    background-color: #109a10;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#save-button:hover {
+    background-color: #0d730d;
+}
+
+#save-button:active {
+    background-color: #095809;
+}
+
+.upload-select::file-selector-button {
+    min-width: 140px;
+    padding: 10px 15px;
+    margin-bottom: 40px;
+    background-color: #1DB954;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.upload-select::file-selector-button:hover {
+    background-color: #168f41; 
+}
+
+.upload-select::file-selector-button:active {
+    background-color: #136b32;
+}
