@@ -12,27 +12,46 @@ class ImageDownloader:
     def create_output_directory(self):
         os.makedirs(self.output_directory, exist_ok=True)
 
+    def invert_image_colors(self, pil_image):
+        # Ensure the image has an 'RGBA' mode
+        pil_image = pil_image.convert('RGBA')
+
+        # Invert the colors for non-transparent pixels
+        inverted_data = []
+        for r, g, b, a in pil_image.getdata():
+            if a == 0:  # If the pixel is fully transparent, keep it transparent
+                inverted_data.append((r, g, b, a))
+            else:  # Otherwise, invert the colors
+                inverted_data.append((255 - r, 255 - g, 255 - b, a))
+
+        # Create a new image with the inverted data
+        inverted_img = Image.new('RGBA', pil_image.size)
+        inverted_img.putdata(inverted_data)
+
+        # Convert the image to 'RGB' mode before returning (flattening transparency)
+        return inverted_img.convert('RGB')
+
     def download_images(self):
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
-        # Fetch entries where both original_image and drawn_image are not null
         cursor.execute("SELECT id, original_image, drawn_image FROM images WHERE original_image IS NOT NULL AND drawn_image IS NOT NULL")
         rows = cursor.fetchall()
 
         for row in rows:
             image_id, original_image, drawn_image = row[0], row[1], row[2]
 
-            # Convert the binary data to PIL Images
             original_pil_image = Image.open(BytesIO(original_image))
             drawn_pil_image = Image.open(BytesIO(drawn_image))
 
-            # Save the images as PNG
+            # Invert colors of drawn image
+            inverted_drawn_image = self.invert_image_colors(drawn_pil_image)
+
             original_output_path = os.path.join(self.output_directory, f"image_{image_id}_original.jpg")
             drawn_output_path = os.path.join(self.output_directory, f"image_{image_id}_drawn.jpg")
 
-            original_pil_image.save(original_output_path, format="PNG")
-            drawn_pil_image.save(drawn_output_path, format="PNG")
+            original_pil_image.save(original_output_path, format="JPEG")
+            inverted_drawn_image.save(drawn_output_path, format="JPEG")
 
         print(f"All images downloaded and saved to {self.output_directory}")
 
