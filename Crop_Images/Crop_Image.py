@@ -83,7 +83,7 @@ def crop_images(folder_path, output_folder, size=(512, 512)): # tested
             file_name.replace(folder_path, "")
 
         # Check if the file is an image (you may want to add more image extensions)
-        if file_name.endswith('.jpg') or file_name.endswith('.png') or file_name.endswith('.jpeg'):
+        if file_name.endswith('.jpg') or file_name.endswith('.png') or file_name.endswith('.jpeg') or file_name.endswith('.JPG'):
             try:
                 print(file_name)
 
@@ -112,7 +112,7 @@ def crop_images(folder_path, output_folder, size=(512, 512)): # tested
 
 # Example usage
 if __name__ == "__main__":
-    input_folder = "images/"
+    input_folder = "raw"
     output_folder = "images_512x512/"
 
     crop_images(input_folder, output_folder)
